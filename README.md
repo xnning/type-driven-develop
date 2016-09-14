@@ -6,4 +6,4 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
 
 ## Progress
 
-- [ ] Overview
+- [x] [Overview](./notes/overview.md)
