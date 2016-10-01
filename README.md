@@ -7,4 +7,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
 ## Progress
 
 - [x] [Overview](./notes/overview.md)
-- [ ] [Getting Started with Idris](./notes/getting_started_with_idris.md)
+- [x] [Getting Started with Idris](./notes/getting_started_with_idris.md)
+  ; [Exercises](./exercises/getting_started_with_idris.idr)

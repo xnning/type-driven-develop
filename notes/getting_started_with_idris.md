@@ -22,3 +22,5 @@
   - Boolean.
 
 - `cast` converts types. Idris supports casting between all of the primitive types, and it is possible to add user defined casts.
+
+- Documentation comments `:doc` are used to provide documentation for functions and types at the REPL; introduced with three vertical bars, `|||`
