@@ -9,5 +9,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
 - [x] [Overview](./notes/overview.md)
 - [x] [Getting Started with Idris](./notes/getting_started_with_idris.md)
   ; [Exercises](./exercises/getting_started_with_idris.idr)
-- [ ] [Interactive Development with Types](./notes/interactive_development_with_types.md)
+- [x] [Interactive Development with Types](./notes/interactive_development_with_types.md)
   ; [Exercises](./exercises/interactive_development_with_types.idr)
