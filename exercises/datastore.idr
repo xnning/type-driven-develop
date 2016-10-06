@@ -44,6 +44,14 @@ getEntry pos store = let store_items = items store
                           Nothing => Just ("Out of range\n", store)
                           Just id => Just (index id store_items ++ "\n", store)
 
+search_string : (n: Nat) -> (str:String) -> (store:Vect m String) -> String
+search_string n str [] = ""
+search_string n str (x :: xs) =
+  let rest = search_string (n + 1) str xs
+  in case isInfixOf str x of
+        True => show n ++ ": " ++ x ++ "\n" ++ rest
+        False => rest
+
 processInput : DataStore -> String -> Maybe (String, DataStore)
 processInput store inp = case parse inp of
                       Nothing => Just ("Invalid command\n", store)
@@ -51,7 +59,7 @@ processInput store inp = case parse inp of
                         Just ("ID: " ++ show (size store) ++ "\n", addToStore store item)
                       Just (Get pos) => getEntry pos store
                       Just Size => Just ("Current Size: " ++ show (size store) ++ "\n", store)
-                      Just (Search str) => ?search_str
+                      Just (Search str) => Just (search_string 0 str (items store), store)
                       Just Quit => Nothing
 
 main : IO ()
