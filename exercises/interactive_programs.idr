@@ -1,4 +1,5 @@
 import System
+import Data.Vect
 
 -- 5.1.4
 printLonger : IO ()
@@ -69,3 +70,37 @@ replWith2 state prompt f = do putStr prompt
                                 Just (out, newstate) => do putStr out
                                                            replWith newstate prompt f
                                 Nothing => pure ()
+
+-- 5.3.5
+
+readToBlank : IO (List String)
+readToBlank = do x <- getLine
+                 if x == "" then pure []
+                 else do xs <- readToBlank
+                         pure (x :: xs)
+
+readAndSave : IO ()
+readAndSave = do putStrLn "Enter content (blank line to end):"
+                 content <- readToBlank
+                 putStrLn "Input file name:"
+                 filename <- getLine
+                 Right () <- writeFile filename (unlines content)
+                     | Left err => putStrLn (show err)
+                 pure ()
+
+readVectFile : (filename : String) -> IO (n ** Vect n String)
+readVectFile filename = do Right file <- openFile filename Read
+                             | Left _ => pure (_ ** [])
+                           Right context <- readContent file
+                             | Left _ => pure (_ ** [])
+                           closeFile file
+                           pure context
+  where readContent : (file: File) -> IO (Either FileError (n ** Vect n String))
+        readContent file = do eof <- fEOF file
+                              if eof
+                              then pure (Right (_ ** []))
+                              else do Right line <- fGetLine file
+                                        | Left err => pure (Left err)
+                                      Right (_ ** lines) <- readContent file
+                                        | Left err => pure (Left err)
+                                      pure (Right (_ ** line :: lines))

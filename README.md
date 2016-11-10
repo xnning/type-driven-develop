@@ -14,5 +14,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
 - [x] [User Defined Datatypes](./notes/user_defined_data_types.md)
   ; [Exercises](./exercises/user_defined_data_types.idr)
   ; [datastore](./exercises/datastore.idr)
-- [ ] [Interactive Programs](./notes/interactive_programs.md)
+- [x] [Interactive Programs](./notes/interactive_programs.md)
   ; [Exercises](./exercises/interactive_programs.idr)
