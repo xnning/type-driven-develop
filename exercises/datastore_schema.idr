@@ -31,7 +31,7 @@ addToStore (MkData schema size items) newitem = MkData _ _ (addToData items)
 data Command : Schema -> Type where
        SetSchema : (newschema : Schema) -> Command schema
        Add : SchemaType schema -> Command schema
-       Get : Integer -> Command schema
+       Get : (Maybe Integer) -> Command schema
        Quit : Command schema
 
 parseSchema : List String -> Maybe Schema
@@ -83,9 +83,10 @@ parseCommand : (schema: Schema) -> String -> String -> Maybe (Command schema)
 parseCommand schema "add" str = do
     cmd <- parseBySchema schema str
     Just (Add cmd)
+parseCommand schema "get" "" = Just (Get Nothing)
 parseCommand schema "get" val = case all isDigit (unpack val) of
                                 False => Nothing
-                                True => Just (Get (cast val))
+                                True => Just (Get (Just (cast val)))
 parseCommand schema "quit" "" = Just Quit
 parseCommand schema "schema" rest = do
     schemaok <- parseSchema (words rest)
@@ -113,6 +114,10 @@ setSchema store schema = case size store of
                            Z => Just (MkData schema _ [])
                            S k => Nothing
 
+displayall :  Nat -> Vect size (SchemaType schema) -> String
+displayall n [] = ""
+displayall n (x :: xs) = show n ++ " : " ++ display x ++ "\n" ++ (displayall (n + 1) xs)
+
 processInput : DataStore -> String -> Maybe (String, DataStore)
 processInput store inp = case parse (schema store) inp of
                       Nothing => Just ("Invalid command\n", store)
@@ -122,7 +127,8 @@ processInput store inp = case parse (schema store) inp of
                         case setSchema store schema' of
                           Nothing => Just ("Can't update schema\n", store)
                           Just store' => Just ("OK\n", store')
-                      Just (Get pos) => getEntry pos store
+                      Just (Get Nothing) => Just (displayall 0 (items store) ++ "\n", store)
+                      Just (Get (Just pos)) => getEntry pos store
                       Just Quit => Nothing
 
 main : IO ()
