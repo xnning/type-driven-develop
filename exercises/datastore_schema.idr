@@ -47,6 +47,12 @@ parseSchema ("Int" :: xs) =
       _  => case parseSchema xs of
               Nothing => Nothing
               Just xs_sch => Just (SInt .+. xs_sch)
+parseSchema ("Char" :: xs) =
+  case xs of
+      [] => Just SChar
+      _  => case parseSchema xs of
+              Nothing => Nothing
+              Just xs_sch => Just (SChar .+. xs_sch)
 parseSchema _ = Nothing
 
 parsePrefix : (schema : Schema) -> (str : String) -> Maybe (SchemaType schema, String)
@@ -60,10 +66,14 @@ parsePrefix SString str = getQuoted (unpack str)
 parsePrefix SInt str = case span isDigit str of
                          ("", rest) => Nothing
                          (num, rest) => Just (cast num, ltrim rest)
+parsePrefix SChar str = case unpack str of
+                          (c :: cs) => Just (c, ltrim (pack cs))
+                          _ => Nothing
 parsePrefix (x .+. y) str = do
     (l_val, input) <- parsePrefix x str
     (r_val, rest) <- parsePrefix y input
     pure ((l_val, r_val), rest)
+
 parseBySchema : (schema : Schema) -> (str : String) -> Maybe (SchemaType schema)
 parseBySchema schema str = case (parsePrefix schema str ) of
                                 Just (res, "") => Just res
@@ -89,6 +99,7 @@ parse schema input = case span (/= ' ') input of
 display : SchemaType schema -> String
 display {schema = SString} item = item
 display {schema = SInt} item = show item
+display {schema = SChar} item = show item
 display {schema = (x .+. y)} (a, b) = display a ++ ", " ++ display b
 
 getEntry : (pos : Integer) -> (store: DataStore) -> Maybe (String, DataStore)
