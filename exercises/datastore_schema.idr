@@ -38,21 +38,21 @@ parseSchema : List String -> Maybe Schema
 parseSchema ("String" :: xs) =
   case xs of
       [] => Just SString
-      _  => case parseSchema xs of
-              Nothing => Nothing
-              Just xs_sch => Just (SString .+. xs_sch)
+      _  => do
+        xs_sch <- parseSchema xs
+        pure (SString .+. xs_sch)
 parseSchema ("Int" :: xs) =
   case xs of
       [] => Just SInt
-      _  => case parseSchema xs of
-              Nothing => Nothing
-              Just xs_sch => Just (SInt .+. xs_sch)
+      _  => do
+        xs_sch <- parseSchema xs
+        pure (SInt .+. xs_sch)
 parseSchema ("Char" :: xs) =
   case xs of
       [] => Just SChar
-      _  => case parseSchema xs of
-              Nothing => Nothing
-              Just xs_sch => Just (SChar .+. xs_sch)
+      _  => do
+        xs_sch <- parseSchema xs
+        pure (SChar .+. xs_sch)
 parseSchema _ = Nothing
 
 parsePrefix : (schema : Schema) -> (str : String) -> Maybe (SchemaType schema, String)
@@ -75,9 +75,9 @@ parsePrefix (x .+. y) str = do
     pure ((l_val, r_val), rest)
 
 parseBySchema : (schema : Schema) -> (str : String) -> Maybe (SchemaType schema)
-parseBySchema schema str = case (parsePrefix schema str ) of
-                                Just (res, "") => Just res
-                                _ => Nothing
+parseBySchema schema str = do
+    (res, "") <- parsePrefix schema str
+    pure res
 
 parseCommand : (schema: Schema) -> String -> String -> Maybe (Command schema)
 parseCommand schema "add" str = do

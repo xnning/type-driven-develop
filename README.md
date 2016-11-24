@@ -16,6 +16,6 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
   ; [datastore](./exercises/datastore.idr)
 - [x] [Interactive Programs](./notes/interactive_programs.md)
   ; [Exercises](./exercises/interactive_programs.idr)
-- [ ] [Programming with First-Class Types](./notes/programming_with_first_class_types.md)
+- [x] [Programming with First-Class Types](./notes/programming_with_first_class_types.md)
   ; [Exercises](./exercises/programming_with_first_class_types.idr)
   ; [datastore](./exercises/datastore_schema.idr)
