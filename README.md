@@ -19,3 +19,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
 - [x] [Programming with First-Class Types](./notes/programming_with_first_class_types.md)
   ; [Exercises](./exercises/programming_with_first_class_types.idr)
   ; [datastore](./exercises/datastore_schema.idr)
+- [x] [Interfaces: using constrained generic types](./notes/interfaces.md)
+  ; [Exercises](./exercises/interfaces.idr)
