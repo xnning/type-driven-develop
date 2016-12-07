@@ -21,3 +21,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
   ; [datastore](./exercises/datastore_schema.idr)
 - [x] [Interfaces: using constrained generic types](./notes/interfaces.md)
   ; [Exercises](./exercises/interfaces.idr)
+- [x] [Equality: expressing relationships between data](./notes/equality.md)
+  ; [Exercises](./exercises/equality.idr)
