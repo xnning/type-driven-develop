@@ -23,3 +23,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
   ; [Exercises](./exercises/interfaces.idr)
 - [x] [Equality: expressing relationships between data](./notes/equality.md)
   ; [Exercises](./exercises/equality.idr)
+- [x] [Predicates: expressing assumptions and contracts in types](./notes/predicates.md)
+  ; [Exercises](./exercises/predicates.idr)
