@@ -25,3 +25,5 @@ Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-d
   ; [Exercises](./exercises/equality.idr)
 - [x] [Predicates: expressing assumptions and contracts in types](./notes/predicates.md)
   ; [Exercises](./exercises/predicates.idr)
+- [ ] [Views: Extending Pattern Matching](./notes/views.md)
+  ; [Exercises](./exercises/views.idr)
