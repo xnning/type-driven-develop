@@ -20,7 +20,7 @@ data ListLast : List a -> Type where
 - Covering function convert original data type into the view form
 
 ```idris
-otal
+total
 listLast : (xs : List a) -> ListLast xs
 listLast [] = Empty
 listLast (x :: xs) = case listLast xs of
@@ -67,3 +67,11 @@ myReverse' xs with (snocList xs)
   myReverse' [] | Empty = []
   myReverse' (ys ++ [x]) | (Snoc rec) = x :: myReverse' ys | rec
 ```
+
+**Modules**
+
+- Export modifiers, default private:
+    - `private`: meaning that the name is not exported at all.
+    - `export` : meaning that the name and type are exported, but not the definition.
+    - `public export`: meaning that the name, type, and complete definition are exported.
+

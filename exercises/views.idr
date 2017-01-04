@@ -3,6 +3,10 @@ import Data.Vect
 import Data.Vect.Views
 import Data.Nat.Views
 
+-- used for exercises 10.3.4
+import datastore_module
+import shape_abs
+
 -- 10.1.6
 
 data TakeN : List a -> Type where
@@ -60,3 +64,16 @@ palindrome xs with (vList xs)
   palindrome [x] | VOne = True
   palindrome (x :: (ys ++ [y])) | (VCons rec) =
     if x == y then palindrome ys | rec else False
+
+-- 10.3.4
+
+getValues : DataStore (SString .+. val_schema) -> List (SchemaType val_schema)
+getValues input with (storeView input)
+  getValues input | SNil = []
+  getValues (addToStore (key, value) store) | (SAdd rec) = value :: getValues store | rec
+
+area : Shape -> Double
+area s with (shapeView s)
+    area (triangle base height) | STriangle = base * height / 2
+    area (rectangle width height) | SRectangle = width * height
+    area (circle radius) | SCircle = radius * radius * pi
