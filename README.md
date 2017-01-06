@@ -1,8 +1,8 @@
-# Type Driven Develop Notes
+# Type Driven Development
 
 ## Description
 
-Notes for book [Type Driven Develop](https://www.manning.com/books/type-driven-development-with-idris)
+Notes and exercises for book [Type Driven Development with Idris](https://www.manning.com/books/type-driven-development-with-idris)
 
 ## Progress
 
